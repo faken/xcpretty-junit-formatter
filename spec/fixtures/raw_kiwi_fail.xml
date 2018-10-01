@@ -1,0 +1,29 @@
+ <testsuites name="xcode_build">
+  <testsuite name="compile">
+    <testcase name="failures">
+    </testcase>
+    <testcase name="errors">
+    </testcase>
+  </testsuite>
+  <testsuite name="test">
+    <testcase name="FindersAndCreators">
+      <failure message="expected subject to equal &quot;Luca&quot;, got &quot;John&quot;" type="ERROR">
+File: /Users/musalj/code/OSS/ObjectiveRecord/Example/SampleProjectTests/FindersAndCreatorsTests.m:111
+Reason: expected subject to equal "Luca", got "John"
+Test Case: FindCreateSaveDeleteSpecs_Finders_FindsTheFirstMatch
+</failure>
+    </testcase>
+    <testcase name="MappingsTests">
+      <failure message="expected subject to equal 24, got 25" type="ERROR">
+File: /Users/musalj/code/OSS/ObjectiveRecord/Example/SampleProjectTests/MappingsTests.m:61
+Reason: expected subject to equal 24, got 25
+Test Case: Mappings_UsesMappedValuesWhenCreating
+</failure>
+      <failure message="expected subject to equal &quot;Alice&quot;, got &quot;Bob&quot;" type="ERROR">
+File: /Users/musalj/code/OSS/ObjectiveRecord/Example/SampleProjectTests/MappingsTests.m:82
+Reason: expected subject to equal "Alice", got "Bob"
+Test Case: Mappings_UsesMappingsInFindOrCreate
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

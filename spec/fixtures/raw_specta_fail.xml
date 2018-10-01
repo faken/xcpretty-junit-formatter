@@ -1,0 +1,17 @@
+<testsuites name="xcode_build">
+  <testsuite name="compile">
+    <testcase name="failures">
+    </testcase>
+    <testcase name="errors">
+    </testcase>
+  </testsuite>
+  <testsuite name="test">
+    <testcase name="RACTupleSpec">
+      <failure message="expected: foobar, got: seoitns" type="ERROR">
+File: /Users/musalj/code/OSS/ReactiveCocoa/ReactiveCocoaFramework/ReactiveCocoaTests/RACTupleSpec.m:28
+Reason: expected: foobar, got: seoitns
+Test Case: RACTupleUnpack_should_unpack_multiple_values
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

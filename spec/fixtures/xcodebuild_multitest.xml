@@ -1,0 +1,24 @@
+<testsuites name="xcode_build">
+  <testsuite name="compile">
+    <testcase name="failures">
+    </testcase>
+    <testcase name="errors">
+    </testcase>
+  </testsuite>
+  <testsuite name="test">
+    <testcase name="BlackJack_Tests.DeckTestCase">
+      <failure message="XCTAssertEqual failed: (&quot;52&quot;) is not equal to (&quot;51&quot;) -" type="ERROR">
+File: /BlackJack/Framework/Tests/DeckTests.swift:49
+Reason: XCTAssertEqual failed: ("52") is not equal to ("51") -
+Test Case: testStandardDeck
+</failure>
+    </testcase>
+    <testcase name="BlackJack_Tests.GameTestCase">
+      <failure message="XCTAssertEqual failed: (&quot;Dealer&quot;) is not equal to (&quot;Nooop&quot;) -" type="ERROR">
+File: /BlackJack/Framework/Tests/GameTests.swift:23
+Reason: XCTAssertEqual failed: ("Dealer") is not equal to ("Nooop") -
+Test Case: testInitialization
+</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

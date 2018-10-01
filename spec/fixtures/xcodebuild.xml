@@ -1,0 +1,11 @@
+<testsuites name="xcode_build">
+  <testsuite name="compile">
+    <testcase name="failures">
+      <failure>Capabilities that require entitlements from "SampleProject/SampleProject.entitlements" may not function in the Simulator because none of the valid provisioning profiles allowed the specified entitlements: com.apple.security.application-groups, keychain-access-groups.</failure>
+    </testcase>
+    <testcase name="errors">
+    </testcase>
+  </testsuite>
+  <testsuite name="test">
+  </testsuite>
+</testsuites>

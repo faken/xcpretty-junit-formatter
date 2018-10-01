@@ -1,0 +1,24 @@
+<testsuites name="xcode_build">
+  <testsuite name="compile">
+    <testcase name="failures">
+    </testcase>
+    <testcase name="errors">
+      <error message="use of undeclared identifier 'trololo'" type="ERROR">
+File: NSNumber+ObjectiveSugar.m
+Path: /Users/musalj/code/OSS/ObjectiveSugar/Classes/NSNumber+ObjectiveSugar.m:26:5
+Line:     trololo
+Reason: use of undeclared identifier 'trololo'
+Cursor:     ^
+</error>
+      <error message="returning 'float' from a function with incompatible result type 'NSNumber *'" type="ERROR">
+File: NSNumber+ObjectiveSugar.m
+Path: /Users/musalj/code/OSS/ObjectiveSugar/Classes/NSNumber+ObjectiveSugar.m:47:12
+Line:     return (self.floatValue * 60);
+Reason: returning 'float' from a function with incompatible result type 'NSNumber *'
+Cursor:            ^~~~~~~~~~~~~~~~~~~~~~
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="test">
+  </testsuite>
+</testsuites>
