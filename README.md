@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE.txt)
 [![Gem](https://img.shields.io/gem/v/xcpretty-junit-formatter.svg?style=flat)](http://rubygems.org/gems/xcpretty-junit-formatter)
-[![Build Status](https://travis-ci.org/marcelofabri/xcpretty-json-formatter.svg?branch=master)](https://travis-ci.org/marcelofabri/xcpretty-json-formatter)
+[![Build Status](https://travis-ci.org/faken/xcpretty-junit-formatter.svg?branch=master)](https://travis-ci.org/faken/xcpretty-junit-formatter)
 
 Custom formatter for [xcpretty](https://github.com/supermarin/xcpretty) that saves on a XML (JUnit) file all the errors, warnings and test failures, so you can process them easily later.
 
