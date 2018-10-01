@@ -33,9 +33,9 @@ class JUNITFormatter < XCPretty::Simple
 
   def format_compile_warning(file_name, file_path, reason, line, cursor)
     @compile_warnings << {
-      message: reason, 
-      type: "WARNING", 
-      "content" => "\nFile: #{file_name}\n"\
+      message: reason,
+      type: 'WARNING',
+      'content' => "\nFile: #{file_name}\n"\
                    "Path: #{file_path}\n"\
                    "Line: #{line}\n"\
                    "Reason: #{reason}\n"\
@@ -53,9 +53,9 @@ class JUNITFormatter < XCPretty::Simple
 
   def format_compile_error(file_name, file_path, reason, line, cursor)
     @compile_errors << {
-      message: reason, 
-      type: "ERROR", 
-      "content" => "\nFile: #{file_name}\n"\
+      message: reason,
+      type: 'ERROR',
+      'content' => "\nFile: #{file_name}\n"\
                    "Path: #{file_path}\n"\
                    "Line: #{line}\n"\
                    "Reason: #{reason}\n"\
@@ -67,9 +67,9 @@ class JUNITFormatter < XCPretty::Simple
 
   def format_file_missing_error(reason, file_path)
     @file_missing_errors << {
-      message: reason, 
-      type: "ERROR", 
-      "content" => "\nFile: #{file_path}\n"\
+      message: reason,
+      type: 'ERROR',
+      'content' => "\nFile: #{file_path}\n"\
                    "Reason: #{reason}\n"
     }
     write_to_file_if_needed
@@ -79,9 +79,9 @@ class JUNITFormatter < XCPretty::Simple
   def format_undefined_symbols(message, symbol, reference)
     @undefined_symbols_errors = {
       message: message,
-      type: "ERROR", 
-      "content" => "Reference: #{reference}"\
-      "Symbol: #{symbol}"
+      type: 'ERROR',
+      'content' => "Reference: #{reference}"\
+                   "Symbol: #{symbol}"
     }
     write_to_file_if_needed
     super
@@ -90,35 +90,31 @@ class JUNITFormatter < XCPretty::Simple
   def format_duplicate_symbols(message, file_paths)
     @duplicate_symbols_errors = {
       message: message,
-      type: "ERROR", 
-      "content" => "\nMessage: #{message}\n"\
-      "Paths: #{file_paths}\n"
+      type: 'ERROR',
+      'content' => "\nMessage: #{message}\n"\
+                   "Paths: #{file_paths}\n"
     }
     write_to_file_if_needed
     super
   end
 
   def format_test_summary(message, failures_per_suite)
-    @failures = failures_per_suite.map { |key, value|
+    @failures = failures_per_suite.map do |key, value|
       {
         name: key,
-        failure: value.map { |failure| 
+        failure: value.map do |failure|
           {
-            message: CGI.escapeHTML(failure[:reason]), 
-            type: "ERROR", 
-            "content" => "\nFile: #{failure[:file_path]}\n"\
+            message: CGI.escapeHTML(failure[:reason]),
+            type: 'ERROR',
+            'content' => "\nFile: #{failure[:file_path]}\n"\
                          "Reason: #{failure[:reason]}\n"\
                          "Test Case: #{failure[:test_case]}\n"
           }
-        }
-      } 
-    }
+        end
+      }
+    end
 
     @tests_summary_messages << message
-
-    puts "😂: #{@failures}"
-    puts "😂: #{@tests_summary_messages}"
-
     write_to_file_if_needed
     super
   end
@@ -128,59 +124,60 @@ class JUNITFormatter < XCPretty::Simple
     super
   end
 
-  def combined_compile_errors 
-    [ @errors, @compile_errors, @file_missing_errors, 
-      @undefined_symbols_errors, @duplicate_symbols_errors ].flatten.compact.delete_if &:empty?
-    end
-
-    def combined_compile_warnings 
-      [@warnings, @ld_warnings, @compile_warnings].flatten.compact.delete_if &:empty?
-    end
-
-    def combined_test_failures
-      [@failures].flatten.compact.delete_if &:empty?
-    end
-
-    def junit_output
-      {
-        testsuites: {
-          name: "xcode_build", 
-          testsuite: [
-            {
-              name: "compile", 
-              testcase: [
-                {
-                  name: "failures", 
-                  failure: combined_compile_warnings
-                }, 
-                {
-                  name: "errors", 
-                  error: combined_compile_errors
-                }
-              ]
-            }, 
-            {
-              name: "test", 
-              testcase: combined_test_failures
-            }
-          ]
-        }
-      }
-    end
-
-    def write_to_file_if_needed
-      write_to_file unless XCPretty::Formatter.method_defined? :finish
-    end
-
-    def write_to_file
-      file_name = ENV['XCPRETTY_JUNIT_FILE_OUTPUT'] || FILE_PATH
-      dirname = File.dirname(file_name)
-      FileUtils.mkdir_p dirname
-
-      File.open(file_name, 'w') do |io|
-        io.write(XmlSimple.xml_out(junit_output, {keeproot: true, noescape: true}))
-      end
-    end
+  def combined_compile_errors
+    [@errors, @compile_errors, @file_missing_errors,
+     @undefined_symbols_errors, @duplicate_symbols_errors].flatten.reject(&:empty?).compact
   end
 
-  JUNITFormatter
+  def combined_compile_warnings
+    [@warnings, @ld_warnings, @compile_warnings].flatten.reject(&:empty?).compact
+  end
+
+  def combined_test_failures
+    [@failures].flatten.compact.reject(&:empty?)
+  end
+
+  def junit_output
+    {
+      testsuites: {
+        name: 'xcode_build',
+        testsuite: [
+          {
+            name: 'compile',
+            testcase: [
+              {
+                name: 'failures',
+                failure: combined_compile_warnings
+              },
+              {
+                name: 'errors',
+                error: combined_compile_errors
+              }
+            ]
+          },
+          {
+            name: 'test',
+            testcase: combined_test_failures
+          }
+        ]
+      }
+    }
+  end
+
+  def write_to_file_if_needed
+    write_to_file unless XCPretty::Formatter.method_defined? :finish
+  end
+
+  def write_to_file
+    file_name = ENV['XCPRETTY_JUNIT_FILE_OUTPUT'] || FILE_PATH
+    dirname = File.dirname(file_name)
+    FileUtils.mkdir_p dirname
+
+    File.open(file_name, 'w') do |io|
+      xml_simple_options = { keeproot: true, noescape: true }
+      io.write(XmlSimple.xml_out(junit_output, xml_simple_options))
+    end
+  end
+end
+
+JUNITFormatter
