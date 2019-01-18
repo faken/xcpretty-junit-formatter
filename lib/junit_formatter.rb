@@ -174,7 +174,7 @@ class JUNITFormatter < XCPretty::Simple
     FileUtils.mkdir_p dirname
 
     File.open(file_name, 'w') do |io|
-      xml_simple_options = { keeproot: true, noescape: true }
+      xml_simple_options = { keeproot: true, noescape: false }
       io.write(XmlSimple.xml_out(junit_output, xml_simple_options))
     end
   end

@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'xcpretty-junit-formatter'
-  spec.version       = '0.1'
+  spec.version       = '0.1.1'
   spec.authors       = ['Sascha Held']
   spec.email         = ['saschaheld@me.com']
 
